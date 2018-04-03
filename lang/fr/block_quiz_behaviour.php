@@ -28,6 +28,7 @@ $string['quiz_behaviour:addinstance'] = 'Ajouter le bloc Quiz Behaviour';
 
 $string['afterattempt'] = 'Après la tentative';
 $string['alternateattemptpage'] = 'Disposition alternative de la page de test';
+$string['beforeattempt'] = 'Avant la tentative';
 $string['deadend'] = 'Cul de sac';
 $string['deadendmessage'] = 'Message de cul de sac';
 $string['deadendcaption'] = 'Titre de cul de sac';
@@ -44,6 +45,7 @@ $string['nobackwards'] = 'Pas de retour en arrère';
 $string['pluginname'] = 'Comportement de quiz';
 $string['quizbehaviourconfig'] = 'Configuration du comportement des tests';
 $string['screenprotect'] = 'Protection de contenu';
+$string['startnewever'] = 'Recommencer toujours une nouvelle tentative';
 $string['trapoutlinks'] = 'Piéger les liens sortants';
 $string['youhave'] = 'Vous avez {$a} tests dans ce cours.';
 

@@ -38,6 +38,14 @@ class block_quiz_behaviour_edit_form extends block_edit_form {
             $mform->addElement('advcheckbox', 'config_alternateattemptpage', $qname, get_string('alternateattemptpage', 'block_quiz_behaviour'));
 
             $group = array();
+            $group[] = $mform->createElement('advcheckbox', 'config_startnewever'.$q->id, '');
+            $group[] = $mform->createElement('static', '', ''); // Add a last empty elm for labels.
+
+            $labels = array('&nbsp;'.get_string('startnewever', 'block_quiz_behaviour').'&ensp;&ensp;&ensp;',
+
+            $mform->addGroup($group, 'gr'.$q->id, get_string('beforeattempt', 'block_quiz_behaviour'), $labels, false);
+
+            $group = array();
             $group[] = $mform->createElement('advcheckbox', 'config_protect'.$q->id, '');
             $group[] = $mform->createElement('advcheckbox', 'config_trapoutlinks'.$q->id, '');
             $group[] = $mform->createElement('advcheckbox', 'config_forceanswer'.$q->id, '');
@@ -74,7 +82,7 @@ class block_quiz_behaviour_edit_form extends block_edit_form {
             $attrs = array('cols' => 80, 'rows' => 10);
             $mform->addElement('textarea', 'config_deadendmessage'.$q->id, get_string('deadendmessage', 'block_quiz_behaviour'), $attrs);
             $mform->setType('config_deadendmessage'.$q->id, PARAM_CLEANHTML);
-            $mform->addHelpButton('config_deadendmessage', 'deadendmessage', 'block_quiz_behaviour');
+            $mform->addHelpButton('config_deadendmessage'.$q->id, 'deadendmessage', 'block_quiz_behaviour');
 
             $targetoptions = array('course' => get_string('course'),
                                    'site' => get_string('site'));

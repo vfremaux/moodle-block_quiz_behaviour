@@ -77,16 +77,19 @@ if ($attemptobj->is_own_attempt()) {
         // Do review.
         // redirect($attemptobj->attempt_url(null, $page));
 
-    } else if (!$options->attempt) {
-        $accessmanager->back_to_view_page($PAGE->get_renderer('mod_quiz'),
+    } else {
+        // CHANGE+.
+        if ($manager && $manager->has_behaviour($attemptobj->get_quizid(), 'deadend')) {
+            $params = array('attempt' => $attemptid);
+            redirect(new moodle_url('/blocks/quiz_behaviour/deadend.php', $params));
+        }
+        // CHANGE+.
+
+        if (!$options->attempt) {
+            $accessmanager->back_to_view_page($PAGE->get_renderer('mod_quiz'),
                 $attemptobj->cannot_review_message());
+        }
     }
-    // CHANGE+.
-    if ($manager && $manager->has_behaviour($attemptobj->get_quizid(), 'deadend')) {
-        $params = array('attempt' => $attemptid);
-        redirect(new moodle_url('/blocks/quiz_behaviour/deadend.php', $params));
-    }
-    // CHANGE+.
 
 } else if (!$attemptobj->is_review_allowed()) {
     throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'noreviewattempt');

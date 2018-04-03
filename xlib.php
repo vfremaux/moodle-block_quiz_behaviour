@@ -51,13 +51,13 @@ function block_quiz_behaviour_attempt_adds($attemptobj) {
 
     if ($manager->has_behaviour($qid, 'forceanswer')) {
         $PAGE->requires->js_call_amd('block_quiz_behaviour/quizforceanswer', 'init');
-        $PAGE->requires->css('/blocks/quiz_behaviour/forceanswer.css');
+        $PAGE->requires->css('/blocks/quiz_behaviour/css/forceanswer.css');
     }
 
     if ($manager->has_behaviour($qid, 'protect') &&
             !has_capability('moodle/course:manageactivities', $coursecontext)) {
         $PAGE->requires->js_call_amd('block_quiz_behaviour/quizprotectcopy', 'init');
-        $PAGE->requires->css('/blocks/quiz_behaviour/lockselection.css');
+        $PAGE->requires->css('/blocks/quiz_behaviour/css/lockselection.css');
     }
 
     if ($manager->has_behaviour($qid, 'trapoutlinks') && $PAGE->pagetype == 'mod-quiz-attempt') {
@@ -65,10 +65,14 @@ function block_quiz_behaviour_attempt_adds($attemptobj) {
     }
 
     if ($manager->has_behaviour($qid, 'hideflags')) {
-        $PAGE->requires->css('/blocks/quiz_behaviour/hideflags.css');
+        $PAGE->requires->css('/blocks/quiz_behaviour/css/hideflags.css');
     }
 
     if ($manager->has_behaviour($qid, 'nobackwards')) {
-        $PAGE->requires->css('/blocks/quiz_behaviour/nobackwards.css');
+        $PAGE->requires->css('/blocks/quiz_behaviour/css/nobackwards.css');
+    }
+
+    if ($manager->has_behaviour($qid, 'alternateattemptpage')) {
+        $PAGE->requires->css('/blocks/quiz_behaviour/css/alternateattemptpage.css');
     }
 }
