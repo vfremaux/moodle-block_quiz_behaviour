@@ -29,7 +29,9 @@ $string['quiz_behaviour:addinstance'] = 'Add a Quiz Behaviour block';
 $string['afterattempt'] = 'After attempt';
 $string['alternateattemptpage'] = 'Alternative layout of the attempt page';
 $string['deadend'] = 'Dead end';
+$string['deadendcaption'] = 'Dead end caption';
 $string['deadendmessage'] = 'Dead end message';
+$string['deadendtarget'] = 'Dead end outgoing target';
 $string['directreturn'] = 'Direct return';
 $string['deadendpage'] = 'Quiz exit';
 $string['duringattempt'] = 'During attempt';
@@ -44,3 +46,5 @@ $string['quizbehaviourconfig'] = 'Quiz behaviour configuration';
 $string['screenprotect'] = 'Screen protect';
 $string['trapoutlinks'] = 'Trap outgoing links';
 $string['youhave'] = 'You have {$a} quizzes in this course';
+
+$string['deadendmessage_help'] = 'Dead end message accepts simple HTML and the following placeholders : %%FIRSTNAME%%, %%LASTNAME%%, %%QUIZNAME%% ';
