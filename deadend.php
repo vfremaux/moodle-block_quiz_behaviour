@@ -40,14 +40,27 @@ $PAGE->set_heading(get_string('deadendpage', 'block_quiz_behaviour'));
 
 $manager = \block_quiz_behaviour\manager::instance();
 
-echo $OUTPUT->box_start('quiz-deadend-message');
-echo $manager->get_deadend_message();
-echo $OUTPUT->box_end();
-
-echo $OUTPUT->continue_button($CFG->wwwroot);
-
 echo $OUTPUT->header();
 
+echo $OUTPUT->heading($manager->get_deadend_caption($qid));
 
+echo $OUTPUT->box_start('quiz-deadend-message');
+
+$message = $manager->get_deadend_message($qid);
+
+$qname = format_string($attemptobj->get_quiz()->name);
+
+$message = str_replace('%%FIRSTNAME%%', $USER->firstname, $message);
+$message = str_replace('%%LASTNAME%%', $USER->lastname, $message);
+$message = str_replace('%%QUIZNAME%%', $qname, $message);
+
+echo $message;
+echo $OUTPUT->box_end();
+
+if ($manager->get_deadend_target())
+$buttonurl = new moodle_url('/course/view.php', array('id' => $course->id));
+echo '<p>';
+echo $OUTPUT->continue_button($buttonurl);
+echo '</p>';
 
 echo $OUTPUT->footer();

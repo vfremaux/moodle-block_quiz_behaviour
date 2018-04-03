@@ -87,7 +87,18 @@ class manager {
         // silently answer false in any negative case.
     }
 
-    public function get_deadend_message() {
-        return $this->blockinstance->config->deadendmessage;
+    public function get_deadend_message($qid) {
+        $key = 'deadendmessage'.$qid;
+        return ''.@$this->blockinstance->config->$key;
+    }
+
+    public function get_deadend_caption($qid) {
+        $key = 'deadendcaption'.$qid;
+        return ''.@$this->blockinstance->config->$key;
+    }
+
+    public function get_deadend_target($qid) {
+        $key = 'deadendtarget'.$qid;
+        return ''.@$this->blockinstance->config->$key;
     }
 }

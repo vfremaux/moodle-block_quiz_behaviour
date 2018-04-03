@@ -30,6 +30,8 @@ $string['afterattempt'] = 'Après la tentative';
 $string['alternateattemptpage'] = 'Disposition alternative de la page de test';
 $string['deadend'] = 'Cul de sac';
 $string['deadendmessage'] = 'Message de cul de sac';
+$string['deadendcaption'] = 'Titre de cul de sac';
+$string['deadendtarget'] = 'Destination de cul de sac';
 $string['deadendpage'] = 'Fin du test';
 $string['directreturn'] = 'Retour direct';
 $string['duringattempt'] = 'Pendant la tentative';
@@ -44,3 +46,5 @@ $string['quizbehaviourconfig'] = 'Configuration du comportement des tests';
 $string['screenprotect'] = 'Protection de contenu';
 $string['trapoutlinks'] = 'Piéger les liens sortants';
 $string['youhave'] = 'Vous avez {$a} tests dans ce cours.';
+
+$string['deadendmessage_help'] = 'Le texte du message accepte du HTML simple et les balises d\'insertion suivantes : %%FIRSTNAME%%, %%LASTNAME%%, %%QUIZNAME%% ';

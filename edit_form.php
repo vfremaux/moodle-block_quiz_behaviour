@@ -67,8 +67,18 @@ class block_quiz_behaviour_edit_form extends block_edit_form {
 
             $mform->addElement('advcheckbox', 'config_hideflags'.$q->id, '', get_string('hideflags', 'block_quiz_behaviour'));
 
+            $attrs = array('size' => 255);
+            $mform->addElement('text', 'config_deadendcaption'.$q->id, get_string('deadendcaption', 'block_quiz_behaviour'), $attrs);
+            $mform->setType('config_deadendcaption'.$q->id, PARAM_CLEANHTML);
+
             $attrs = array('cols' => 80, 'rows' => 10);
-            $mform->addElement('textarea', 'config_deadendmessage', get_string('deadendmessage', 'block_quiz_behaviour'), $attrs);
+            $mform->addElement('textarea', 'config_deadendmessage'.$q->id, get_string('deadendmessage', 'block_quiz_behaviour'), $attrs);
+            $mform->setType('config_deadendmessage'.$q->id, PARAM_CLEANHTML);
+            $mform->addHelpButton('config_deadendmessage', 'deadendmessage', 'block_quiz_behaviour');
+
+            $targetoptions = array('course' => get_string('course'),
+                                   'site' => get_string('site'));
+            $mform->addElement('select', 'config_deadendtarget'.$q->id, get_string('deadendtarget', 'block_quiz_behaviour'), $targetoptions);
         }
     }
 }
