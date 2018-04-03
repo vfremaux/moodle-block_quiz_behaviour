@@ -104,7 +104,7 @@ class block_quiz_behaviour extends block_base {
             // Just one is enough to activate.
             if ($manager->has_behaviour($q->id, 'protect')) {
                 $PAGE->requires->js_call_amd('block_quiz_behaviour/quizprotectcopy', 'init');
-                $PAGE->requires->css('/blocks/quiz_behaviour/lockselection.css');
+                $PAGE->requires->css('/blocks/quiz_behaviour/css/lockselection.css');
                 break;
             }
         }

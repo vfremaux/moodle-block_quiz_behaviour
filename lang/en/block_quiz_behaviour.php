@@ -28,6 +28,7 @@ $string['quiz_behaviour:addinstance'] = 'Add a Quiz Behaviour block';
 
 $string['afterattempt'] = 'After attempt';
 $string['alternateattemptpage'] = 'Alternative layout of the attempt page';
+$string['beforeattempt'] = 'Before attempt';
 $string['deadend'] = 'Dead end';
 $string['deadendcaption'] = 'Dead end caption';
 $string['deadendmessage'] = 'Dead end message';
@@ -44,6 +45,7 @@ $string['nobackwards'] = 'No backwards';
 $string['pluginname'] = 'Quiz Behaviour Modifier';
 $string['quizbehaviourconfig'] = 'Quiz behaviour configuration';
 $string['screenprotect'] = 'Screen protect';
+$string['startnewever'] = 'Always restart a new attempt';
 $string['trapoutlinks'] = 'Trap outgoing links';
 $string['youhave'] = 'You have {$a} quizzes in this course';
 
