@@ -87,7 +87,9 @@ if ($attemptobj->is_finished()) {
 $accessmanager = $attemptobj->get_access_manager(time());
 $accessmanager->setup_attempt_page($PAGE);
 $output = $PAGE->get_renderer('mod_quiz');
+// CHANGE+ : Check quiz_behaviour component after require_login to get course initialized.
 $output->set_attemptobj($attemptobj);
+// CHANGE-.
 $messages = $accessmanager->prevent_access();
 if (!$attemptobj->is_preview_user() && $messages) {
     print_error('attempterror', 'quiz', $attemptobj->view_url(),

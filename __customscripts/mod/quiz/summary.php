@@ -58,7 +58,9 @@ if ($attemptobj->is_preview_user()) {
 $accessmanager = $attemptobj->get_access_manager(time());
 $accessmanager->setup_attempt_page($PAGE);
 $output = $PAGE->get_renderer('mod_quiz');
+// CHANGE+.
 $output->set_attemptobj($attemptobj);
+// CHANGE-.
 $messages = $accessmanager->prevent_access();
 if (!$attemptobj->is_preview_user() && $messages) {
     print_error('attempterror', 'quiz', $attemptobj->view_url(),

@@ -27,6 +27,7 @@
 
 // Customscript type : CUSTOMSCRIPT_REPLACE.
 
+// require_once(__DIR__ . '/../../config.php');
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
 require_once($CFG->dirroot . '/mod/quiz/report/reportlib.php');
 
@@ -34,7 +35,7 @@ $attemptid = required_param('attempt', PARAM_INT);
 $page      = optional_param('page', 0, PARAM_INT);
 $showall   = optional_param('showall', null, PARAM_BOOL);
 
-$url = new moodle_url('/mod/quiz/review.php', array('attempt' => $attemptid));
+$url = new moodle_url('/mod/quiz/review.php', array('attempt'=>$attemptid));
 if ($page !== 0) {
     $url->param('page', $page);
 } else if ($showall) {
@@ -73,23 +74,23 @@ $options = $attemptobj->get_display_options(true);
 // Check permissions - warning there is similar code in reviewquestion.php and
 // quiz_attempt::check_file_access. If you change on, change them all.
 if ($attemptobj->is_own_attempt()) {
+    // CHANGE+.
     if (!$attemptobj->is_finished()) {
         // Do review.
         // redirect($attemptobj->attempt_url(null, $page));
 
     } else {
-        // CHANGE+.
         if ($manager && $manager->has_behaviour($attemptobj->get_quizid(), 'deadend')) {
             $params = array('attempt' => $attemptid);
             redirect(new moodle_url('/blocks/quiz_behaviour/deadend.php', $params));
         }
-        // CHANGE+.
 
         if (!$options->attempt) {
             $accessmanager->back_to_view_page($PAGE->get_renderer('mod_quiz'),
                 $attemptobj->cannot_review_message());
         }
     }
+    // CHANGE+.
 
 } else if (!$attemptobj->is_review_allowed()) {
     throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'noreviewattempt');
@@ -273,23 +274,14 @@ $output = $PAGE->get_renderer('mod_quiz');
 $output->set_attemptobj($attemptobj);
 // CHANGE-.
 
-// CHANGE+ block_userquiz_monitor.
-$uqconfig = null;
-if (is_dir($CFG->dirroot.'/blocks/userquiz_monitor')) {
-    include_once($CFG->dirroot . '/blocks/userquiz_monitor/xlib.php');
-    $uqconfig = block_userquiz_monitor_check_has_quiz_ext($attemptobj->get_course(), $attemptobj->get_quizid());
-    $output->set_uqconfig($uqconfig);
-}
-
-// Arrange for the navigation to be displayed.
-if (empty($uqconfig)) {
-    $navbc = $attemptobj->get_navigation_panel($output, 'quiz_review_nav_panel', $page, $showall);
+if ($manager && $manager->has_behaviour($attemptobj->get_quizid(), 'alternateattemptpage')) {
+    $navbc = $attemptobj->get_navigation_panel($output, 'quiz_attempt_nav_panel', -1);
     $regions = $PAGE->blocks->get_regions();
     $PAGE->blocks->add_fake_block($navbc, reset($regions));
 }
 // CHANGE-.
 
-echo $output->review_page($attemptobj, $slots, $page, $showall, $lastpage, $options, $summarydata, $uqconfig);
+echo $output->review_page($attemptobj, $slots, $page, $showall, $lastpage, $options, $summarydata);
 
 // Trigger an event for this review.
 $attemptobj->fire_attempt_reviewed_event();
