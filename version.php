@@ -25,8 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = 2018040200;
-$plugin->requires  = 2017050500;
-$plugin->maturity = MATURITY_BETA;
+$plugin->requires  = 2016120500;
+$plugin->maturity = MATURITY_RC;
 $plugin->release  = "3.2.0 (Build 2018040200)";
 $plugin->component = 'block_quiz_behaviour';
 
