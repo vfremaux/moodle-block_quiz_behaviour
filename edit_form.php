@@ -41,7 +41,7 @@ class block_quiz_behaviour_edit_form extends block_edit_form {
             $group[] = $mform->createElement('advcheckbox', 'config_startnewever'.$q->id, '');
             $group[] = $mform->createElement('static', '', ''); // Add a last empty elm for labels.
 
-            $labels = array('&nbsp;'.get_string('startnewever', 'block_quiz_behaviour').'&ensp;&ensp;&ensp;',
+            $labels = array('&nbsp;'.get_string('startnewever', 'block_quiz_behaviour').'&ensp;&ensp;&ensp;');
 
             $mform->addGroup($group, 'gr'.$q->id, get_string('beforeattempt', 'block_quiz_behaviour'), $labels, false);
 

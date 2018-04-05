@@ -15,9 +15,9 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template block_quiz_behaviour/quizprogressindicator
+    @template block_quiz_behaviour/questionreferences
 
-    Template which renders a graphical progress indicator
+    Template which changes the layout of a question reference.
 
     Classes required for JS:
     * none
@@ -25,8 +25,15 @@
     Data attributes required for JS:
     * none
 }}
-<!-- quizprogressindicator -->
-<div id="quiz-progress-indicator">
-    <div class="quiz-progress-bar" style="width:{{ratio}}%"></div>
+<!-- questionreferences -->
+{{#questionrefs}}
+<div class="qref">
+    <span class="qinfo-label">{{{questionreferencestr}}}:&ensp;</span>
+    <span class="qinfo-value">{{{qname}}}</span>
 </div>
-<!-- /quizprogressindicator -->
+<div class="qcat">
+    <span class="qinfo-label">{{{questioncategorystr}}}:&ensp;</span>
+    <span class="qinfo-value">{{{qcatname}}}</span>
+</div>
+{{/questionrefs}}
+<!-- /questionreferences -->
