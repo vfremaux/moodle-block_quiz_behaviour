@@ -126,7 +126,7 @@ $PAGE->requires->js_init_call('M.mod_quiz.init_attempt_form', null, false, quiz_
 
 // Arrange for the navigation to be displayed in the first region on the page.
 // CHANGE+.
-if ($manager->has_behaviour($attemptobj->get_quizid(), 'alternateattemptpage')) {
+if ($manager && $manager->has_behaviour($attemptobj->get_quizid(), 'alternateattemptpage')) {
     // Standard quiz behaviour.
     $navbc = $attemptobj->get_navigation_panel($output, 'quiz_attempt_nav_panel', $page);
     $regions = $PAGE->blocks->get_regions();
