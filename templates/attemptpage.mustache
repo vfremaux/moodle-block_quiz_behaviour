@@ -15,9 +15,9 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template block_quiz_behaviour/quizprogressindicator
+    @template block_quiz_behaviour/attemptpage
 
-    Template which renders a graphical progress indicator
+    Template which changes the attempt from organisation
 
     Classes required for JS:
     * none
@@ -25,8 +25,25 @@
     Data attributes required for JS:
     * none
 }}
-<!-- quizprogressindicator -->
-<div id="quiz-progress-indicator">
-    <div class="quiz-progress-bar" style="width:{{ratio}}%"></div>
+<!-- attemptpage -->
+{{{header}}}
+
+{{{quiznotices}}}
+
+{{{countdowntimer}}}
+
+<div class="narrow-screen">
+    <div class="question-num">
+        {{{question}}}
+        {{{questionnum}}}
+    </div>
+
+    {{{quizprogressindicator}}}
+    {{{questionrefs}}}
 </div>
-<!-- /quizprogressindicator -->
+
+{{{quizcountdown}}}
+{{{attemptform}}}
+
+{{{footer}}}
+<!-- /attemptpage -->
