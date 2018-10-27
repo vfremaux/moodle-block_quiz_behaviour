@@ -27,6 +27,7 @@
 
 // Customscript type : CUSTOMSCRIPT_REPLACE.
 
+// require_once(__DIR__ . '/../../config.php');
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
 require_once($CFG->dirroot . '/mod/quiz/report/reportlib.php');
 
@@ -73,23 +74,23 @@ $options = $attemptobj->get_display_options(true);
 // Check permissions - warning there is similar code in reviewquestion.php and
 // quiz_attempt::check_file_access. If you change on, change them all.
 if ($attemptobj->is_own_attempt()) {
+    // CHANGE+.
     if (!$attemptobj->is_finished()) {
         // Do review.
         // redirect($attemptobj->attempt_url(null, $page));
 
     } else {
-        // CHANGE+.
         if ($manager && $manager->has_behaviour($attemptobj->get_quizid(), 'deadend')) {
             $params = array('attempt' => $attemptid);
             redirect(new moodle_url('/blocks/quiz_behaviour/deadend.php', $params));
         }
-        // CHANGE+.
 
         if (!$options->attempt) {
             $accessmanager->back_to_view_page($PAGE->get_renderer('mod_quiz'),
                 $attemptobj->cannot_review_message());
         }
     }
+    // CHANGE+.
 
 } else if (!$attemptobj->is_review_allowed()) {
     throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'noreviewattempt');
@@ -278,7 +279,9 @@ $uqconfig = null;
 if (is_dir($CFG->dirroot.'/blocks/userquiz_monitor')) {
     include_once($CFG->dirroot . '/blocks/userquiz_monitor/xlib.php');
     $uqconfig = block_userquiz_monitor_check_has_quiz_ext($attemptobj->get_course(), $attemptobj->get_quizid());
-    $output->set_uqconfig($uqconfig);
+    if ($uqconfig) {
+        $output->set_uqconfig($uqconfig);
+    }
 }
 
 // Arrange for the navigation to be displayed.
