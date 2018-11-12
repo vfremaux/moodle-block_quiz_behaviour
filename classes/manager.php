@@ -61,7 +61,7 @@ class manager {
     public function get_quizzes() {
         global $DB, $COURSE;
 
-        return $DB->get_records('quiz', array('course' => $COURSE->id), 'id,name');
+        return $DB->get_records('quiz', '', 'id,name', array('course' => $COURSE->id));
     }
 
     public function has_behaviour($qid, $behaviour) {
