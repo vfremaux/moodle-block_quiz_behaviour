@@ -272,20 +272,9 @@ if ($showall) {
 $output = $PAGE->get_renderer('mod_quiz');
 // CHANGE+ : block_quiz_behaviour.
 $output->set_attemptobj($attemptobj);
-// CHANGE-.
 
-// CHANGE+ block_userquiz_monitor.
-$uqconfig = null;
-if (is_dir($CFG->dirroot.'/blocks/userquiz_monitor')) {
-    include_once($CFG->dirroot . '/blocks/userquiz_monitor/xlib.php');
-    $uqconfig = block_userquiz_monitor_check_has_quiz_ext($attemptobj->get_course(), $attemptobj->get_quizid());
-    if ($uqconfig) {
-        $output->set_uqconfig($uqconfig);
-    }
-}
-
-// Arrange for the navigation to be displayed.
-if (empty($uqconfig)) {
+// Arrange for the navigation NOT to be displayed.
+if (empty($manager) || !$manager->has_behaviour($attemptobj->get_quizid(), 'alternateattemptpage')) {
     $navbc = $attemptobj->get_navigation_panel($output, 'quiz_review_nav_panel', $page, $showall);
     $regions = $PAGE->blocks->get_regions();
     $PAGE->blocks->add_fake_block($navbc, reset($regions));

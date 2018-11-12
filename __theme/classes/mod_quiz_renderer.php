@@ -44,13 +44,9 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
      */
     public function attempt_page($attemptobj, $page, $accessmanager, $messages, $slots, $id,
             $nextpage) {
-        global $CFG;
 
         $course = $attemptobj->get_course();
-        $manager = null;
-        if (is_dir($CFG->dirroot.'/blocks/quiz_behaviour')) {
-            $manager = get_block_quiz_behaviour_manager();
-        }
+        $manager = get_block_quiz_behaviour_manager();
         $qid = $attemptobj->get_quizid();
 
         if (!$manager || !$manager->has_behaviour($qid, 'alternateattemptpage')) {
@@ -156,14 +152,10 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
      * @param mod_quiz_display_options $displayoptions
      */
     public function summary_page($attemptobj, $displayoptions) {
-        global $CFG;
 
         $course = $attemptobj->get_course();
         $qid = $attemptobj->get_quizid();
-        $manager = null;
-        if (is_dir($CFG->dirroot.'/blocks/quiz_behaviour')) {
-            $manager = get_block_quiz_behaviour_manager();
-        }
+        $manager = get_block_quiz_behaviour_manager();
 
         $output = '';
         $output .= $this->header();
@@ -184,16 +176,11 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
      * @param quiz_attempt $attemptobj
      */
     public function summary_page_controls($attemptobj) {
-        global $CFG;
-
-        $output = '<!-- renderer/summary_page_controls -->';
+        $output = '';
 
         $course = $attemptobj->get_course();
         $qid = $attemptobj->get_quizid();
-        $manager = null;
-        if (is_dir($CFG->dirroot.'/blocks/quiz_behaviour')) {
-            $manager = get_block_quiz_behaviour_manager();
-        }
+        $manager = get_block_quiz_behaviour_manager();
 
         // CHANGE : Make it aware of no-backwards restriction.
         $navmethod = $attemptobj->get_quiz()->navmethod;
@@ -223,7 +210,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
                 get_string('submitallandfinish', 'quiz'));
         $button->id = 'responseform';
 
-        if (!$manager && $manager->has_behaviour($qid, 'alternateattemptpage')) {
+        if (!$manager || !$manager->has_behaviour($qid, 'alternateattemptpage')) {
             if ($attemptobj->get_state() == quiz_attempt::IN_PROGRESS) {
                 $button->add_action(new confirm_action(get_string('confirmclose', 'quiz'), null,
                     get_string('submitallandfinish', 'quiz')));
@@ -456,17 +443,12 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
      * @param quiz_attempt $attemptobj instance of quiz_attempt
      */
     public function finish_review_link(quiz_attempt $attemptobj) {
-        global $CFG;
-
         $url = $attemptobj->view_url();
 
         $course = $attemptobj->get_course();
         $courseurl = new moodle_url('/course/view.php', array('id' => $course->id));
 
-        $manager = null;
-        if (is_dir($CFG->dirroot.'/blocks/quiz_behaviour')) {
-            $manager = get_block_quiz_behaviour_manager();
-        }
+        $manager = get_block_quiz_behaviour_manager();
         $qid = $attemptobj->get_quizid();
 
         if ($manager && $manager->has_behaviour($qid, 'directreturn')) {
@@ -513,12 +495,8 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
      * @param bool $showall if true display attempt on one page
      */
     public function review_form($page, $showall, $displayoptions, $content, $attemptobj) {
-        global $CFG;
 
-        $manager = null;
-        if (is_dir($CFG->dirroot.'/blocks/quiz_behaviour')) {
-            $manager = get_block_quiz_behaviour_manager();
-        }
+        $manager = get_block_quiz_behaviour_manager();
         $qid = $attemptobj->get_quizid();
 
         if ($displayoptions->flags != question_display_options::EDITABLE) {

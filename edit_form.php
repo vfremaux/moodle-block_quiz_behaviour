@@ -35,7 +35,7 @@ class block_quiz_behaviour_edit_form extends block_edit_form {
 
             $qname = format_string($q->name);
 
-            $mform->addElement('advcheckbox', 'config_alternateattemptpage'.$q->id, $qname, get_string('alternateattemptpage', 'block_quiz_behaviour'));
+            $mform->addElement('advcheckbox', 'config_alternateattemptpage', '<b>'.$qname.'</b>', '&nbsp;'.get_string('alternateattemptpage', 'block_quiz_behaviour'));
 
             $group = array();
             $group[] = $mform->createElement('advcheckbox', 'config_startnewever'.$q->id, '');
@@ -73,7 +73,7 @@ class block_quiz_behaviour_edit_form extends block_edit_form {
 
             $mform->addGroup($group, 'gr'.$q->id, get_string('afterattempt', 'block_quiz_behaviour'), $labels, false);
 
-            $mform->addElement('advcheckbox', 'config_hideflags'.$q->id, '', get_string('hideflags', 'block_quiz_behaviour'));
+            $mform->addElement('advcheckbox', 'config_hideflags'.$q->id, '', '&nbsp;'.get_string('hideflags', 'block_quiz_behaviour'));
 
             $attrs = array('size' => 255);
             $mform->addElement('text', 'config_deadendcaption'.$q->id, get_string('deadendcaption', 'block_quiz_behaviour'), $attrs);

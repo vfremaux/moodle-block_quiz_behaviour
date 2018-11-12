@@ -7,7 +7,6 @@
  * - disabled F12
  */
 // jshint undef:false, unused:false
-/* globals $ */
 
 define(['jquery', 'core/log'], function($, log) {
 
