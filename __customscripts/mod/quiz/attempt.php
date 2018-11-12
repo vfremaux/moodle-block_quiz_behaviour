@@ -50,8 +50,15 @@ $PAGE->set_url($attemptobj->attempt_url(null, $page));
 require_login($attemptobj->get_course(), false, $attemptobj->get_cm());
 
 // CHANGE+ : Check quiz_behaviour component after require_login to get course initialized.
+<<<<<<< HEAD
 if (is_dir($CFG->dirroot.'/blocks/quiz_behaviour')) {
     include_once($CFG->dirroot.'/blocks/quiz_behaviour/xlib.php');
+=======
+$manager = null;
+if (is_dir($CFG->dirroot.'/blocks/quiz_behaviour')) {
+    include_once($CFG->dirroot.'/blocks/quiz_behaviour/xlib.php');
+    $manager = get_block_quiz_behaviour_manager();
+>>>>>>> MOODLE_35_STABLE
     block_quiz_behaviour_attempt_adds($attemptobj);
 }
 // CHANGE-.

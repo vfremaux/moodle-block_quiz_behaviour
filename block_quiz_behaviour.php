@@ -109,4 +109,11 @@ class block_quiz_behaviour extends block_base {
             }
         }
     }
+<<<<<<< HEAD
+=======
+
+    public function get_aria_role() {
+        return 'teachertool';
+    }
+>>>>>>> MOODLE_35_STABLE
 }

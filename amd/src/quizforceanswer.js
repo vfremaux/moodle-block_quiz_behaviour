@@ -4,7 +4,10 @@
  * - having single question per page
  */
 // jshint undef:false, unused:false
+<<<<<<< HEAD
 /* globals $ */
+=======
+>>>>>>> MOODLE_35_STABLE
 
 define(['jquery', 'core/log'], function($, log) {
 
@@ -12,8 +15,12 @@ define(['jquery', 'core/log'], function($, log) {
         init: function() {
 
             // Disables end button.
+<<<<<<< HEAD
             questions = $('.que.notyetanswered');
             feedbacks = $('.immediatefeedback');
+=======
+            var questions = $('.que.notyetanswered');
+>>>>>>> MOODLE_35_STABLE
             if (questions.length > 0) {
                 // If we do not have all answered, disable the next button.
                 $('.mod_quiz-next-nav').attr('disabled', 'disabled');

@@ -35,7 +35,11 @@ $attemptid = required_param('attempt', PARAM_INT);
 $page      = optional_param('page', 0, PARAM_INT);
 $showall   = optional_param('showall', null, PARAM_BOOL);
 
+<<<<<<< HEAD
 $url = new moodle_url('/mod/quiz/review.php', array('attempt'=>$attemptid));
+=======
+$url = new moodle_url('/mod/quiz/review.php', array('attempt' => $attemptid));
+>>>>>>> MOODLE_35_STABLE
 if ($page !== 0) {
     $url->param('page', $page);
 } else if ($showall) {
@@ -272,16 +276,27 @@ if ($showall) {
 $output = $PAGE->get_renderer('mod_quiz');
 // CHANGE+ : block_quiz_behaviour.
 $output->set_attemptobj($attemptobj);
+<<<<<<< HEAD
 // CHANGE-.
 
 if ($manager && $manager->has_behaviour($attemptobj->get_quizid(), 'alternateattemptpage')) {
     $navbc = $attemptobj->get_navigation_panel($output, 'quiz_attempt_nav_panel', -1);
+=======
+
+// Arrange for the navigation NOT to be displayed.
+if (empty($manager) || !$manager->has_behaviour($attemptobj->get_quizid(), 'alternateattemptpage')) {
+    $navbc = $attemptobj->get_navigation_panel($output, 'quiz_review_nav_panel', $page, $showall);
+>>>>>>> MOODLE_35_STABLE
     $regions = $PAGE->blocks->get_regions();
     $PAGE->blocks->add_fake_block($navbc, reset($regions));
 }
 // CHANGE-.
 
+<<<<<<< HEAD
 echo $output->review_page($attemptobj, $slots, $page, $showall, $lastpage, $options, $summarydata);
+=======
+echo $output->review_page($attemptobj, $slots, $page, $showall, $lastpage, $options, $summarydata, $uqconfig);
+>>>>>>> MOODLE_35_STABLE
 
 // Trigger an event for this review.
 $attemptobj->fire_attempt_reviewed_event();

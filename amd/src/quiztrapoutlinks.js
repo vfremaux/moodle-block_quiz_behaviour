@@ -4,14 +4,21 @@
  * - having single question per page
  */
 // jshint undef:false, unused:false
+<<<<<<< HEAD
 /* globals $ */
 
+=======
+>>>>>>> MOODLE_35_STABLE
 
 define(['jquery', 'core/str', 'core/log'], function($, str, log) {
 
     var outmessage = "You will loose all results of the attempt. Do you want to continue?";
 
+<<<<<<< HEAD
     var f = function(e) {
+=======
+    var f = function() {
+>>>>>>> MOODLE_35_STABLE
         return outmessage || true;
     };
 

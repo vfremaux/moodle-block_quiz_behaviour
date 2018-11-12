@@ -7,7 +7,10 @@
  * - disabled F12
  */
 // jshint undef:false, unused:false
+<<<<<<< HEAD
 /* globals $ */
+=======
+>>>>>>> MOODLE_35_STABLE
 
 define(['jquery', 'core/log'], function($, log) {
 
