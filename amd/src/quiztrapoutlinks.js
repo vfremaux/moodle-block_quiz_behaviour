@@ -4,14 +4,12 @@
  * - having single question per page
  */
 // jshint undef:false, unused:false
-/* globals $ */
-
 
 define(['jquery', 'core/str', 'core/log'], function($, str, log) {
 
     var outmessage = "You will loose all results of the attempt. Do you want to continue?";
 
-    var f = function(e) {
+    var f = function() {
         return outmessage || true;
     };
 

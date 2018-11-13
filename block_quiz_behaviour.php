@@ -109,4 +109,8 @@ class block_quiz_behaviour extends block_base {
             }
         }
     }
+
+    public function get_aria_role() {
+        return 'teachertool';
+    }
 }

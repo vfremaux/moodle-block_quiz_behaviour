@@ -21,7 +21,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-require_once($CFG->dirroot.'/blocks/quiz_behaviour/xlib.php');
+if (is_dir($CFG->dirroot.'/blocks/quiz_behaviour')) {
+    require_once($CFG->dirroot.'/blocks/quiz_behaviour/xlib.php');
+}
 
 class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
 
@@ -84,7 +86,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
      * @return string HTML fragment.
      */
     protected function local_attempt_navigation_buttons($attemptobj, $page) {
-        global $CFG;
+        global $CFG, $COURSE;
 
         $lastpage = $attemptobj->is_last_page($page);
         $terminatebutton = '';
@@ -92,8 +94,10 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
         if (is_dir($CFG->dirroot.'/blocks/userquiz_monitor')) {
             // Special optional hook.
             include_once($CFG->dirroot.'/blocks/userquiz_monitor/xlib.php');
-            if ($attemptbuttons = block_userquiz_monitor_attempt_buttons($attemptobj, $page)) {
-                return $attemptbuttons;
+            if ($config = block_userquiz_monitor_check_has_quiz_ext($COURSE, $attemptobj->get_quizid())) {
+                if ($attemptbuttons = block_userquiz_monitor_attempt_buttons($attemptobj, $page)) {
+                    return $attemptbuttons;
+                }
             }
         }
 
@@ -104,7 +108,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
             $terminatebutton = html_writer::link($attemptobj->summary_url(), $label, $attrs);
         }
 
-        $output = '';
+        $output = '<!-- renderer/local_attempt_navigation_buttons -->';
         $output .= html_writer::start_tag('div', array('class' => 'submitbtns'));
         $navmethod = $attemptobj->get_quiz()->navmethod;
         if ($page > 0 && $navmethod == 'free') {
@@ -120,6 +124,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
                 'value' => $nextlabel, 'class' => 'mod_quiz-next-nav'));
         $output .= $terminatebutton;
         $output .= html_writer::end_tag('div');
+        $output .= '<!-- /renderer/local_attempt_navigation_buttons -->';
 
         return $output;
 
@@ -129,6 +134,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
      *
      */
     public function quiz_countdown($attemptobj) {
+
         $str = '';
 
         $str .= '<div id="quiz-countdown">';
@@ -204,7 +210,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
                 get_string('submitallandfinish', 'quiz'));
         $button->id = 'responseform';
 
-        if ($manager && $manager->has_behaviour($qid, 'alternateattemptpage'))) {
+        if (!$manager || !$manager->has_behaviour($qid, 'alternateattemptpage')) {
             if ($attemptobj->get_state() == quiz_attempt::IN_PROGRESS) {
                 $button->add_action(new confirm_action(get_string('confirmclose', 'quiz'), null,
                     get_string('submitallandfinish', 'quiz')));
@@ -223,6 +229,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
         $content = '';
         $content .= $message . $this->container($this->render($button), 'controls');
         $output .= $this->container($content, 'submitbtns mdl-align');
+        $output .= '<!-- /renderer/summary_page_controls -->';
 
         return $output;
     }
@@ -258,7 +265,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
     public function attempt_form($attemptobj, $page, $slots, $id, $nextpage) {
         global $DB;
 
-        $output = '';
+        $output = '<!-- renderer/attempt_form -->';
 
         // Start the form.
         $output .= html_writer::start_tag('form',
@@ -300,6 +307,8 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
         $output .= html_writer::end_tag('form');
 
         $output .= $this->connection_warning();
+
+        $output .= '<!-- /renderer/attempt_form -->';
 
         return $output;
     }
@@ -354,11 +363,12 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
      *      attempt this quiz now, if appicable this quiz
      */
     public function view_page($course, $quiz, $cm, $context, $viewobj) {
-        $output = '';
+        $output = '<!-- renderer/view_page -->';
         $output .= $this->view_information($quiz, $cm, $context, $viewobj->infomessages);
         $output .= $this->view_table($quiz, $context, $viewobj);
         $output .= $this->view_result_info($quiz, $context, $cm, $viewobj);
         $output .= $this->box($this->view_page_buttons($viewobj), 'quizattempt');
+        $output .= '<!-- /renderer/view_page -->';
         return $output;
     }
 
@@ -378,7 +388,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
                                 $lastpage, mod_quiz_display_options $displayoptions,
                                 $summarydata) {
 
-        $output = '';
+        $output = '<!-- renderer/review_page -->';
         $output .= $this->header();
         $output .= $this->review_next_navigation($attemptobj, $page, $lastpage, $showall);
         $output .= $this->review_summary_table($summarydata, $page);
@@ -388,6 +398,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
 
         $output .= $this->review_next_navigation($attemptobj, $page, $lastpage, $showall);
         $output .= $this->footer();
+        $output .= '<!-- /renderer/review_page -->';
         return $output;
     }
 
@@ -492,7 +503,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
             return $content;
         }
 
-        $output = '';
+        $output = '<!-- renderer/review_form -->';
 
         if (!$manager || !$manager->has_behaviour($qid, 'hideflags')) {
             $this->page->requires->js_init_call('M.mod_quiz.init_review_form', null, false,
@@ -517,6 +528,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
             $output .= html_writer::end_tag('form');
         }
 
+        $output .= '<!-- /renderer/review_form -->';
         return $output;
     }
 
@@ -527,7 +539,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
      */
     public function navigation_panel(quiz_nav_panel_base $panel) {
 
-        $output = '';
+        $output = '<!-- renderer/navigation_panel -->';
         $userpicture = $panel->user_picture();
         if ($userpicture) {
             $fullname = fullname($userpicture->user);
@@ -553,18 +565,19 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
         $restartlink =  $this->restart_preview_button(new moodle_url(
                 $this->attemptobj->start_attempt_url(), array('forcenew' => true)));
 
-        // CHANGE
+        // CHANGE+.
         $panelcontent = $this->countdown_timer($this->attemptobj, time()).$restartlink;
 
         $output .= html_writer::tag('div', $panelcontent, array('class' => 'othernav'));
 
         // $output .= html_writer::tag('div', $panel->render_end_bits($this),
         //         array('class' => 'othernav'));
-        // /CHANGE
+        // CHANGE-.
 
         $this->page->requires->js_init_call('M.mod_quiz.nav.init', null, false,
                 quiz_get_js_module());
 
+        $output .= '<!-- /renderer/navigation_panel -->';
         return $output;
     }
 }

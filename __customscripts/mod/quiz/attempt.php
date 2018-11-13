@@ -50,8 +50,10 @@ $PAGE->set_url($attemptobj->attempt_url(null, $page));
 require_login($attemptobj->get_course(), false, $attemptobj->get_cm());
 
 // CHANGE+ : Check quiz_behaviour component after require_login to get course initialized.
+$manager = null;
 if (is_dir($CFG->dirroot.'/blocks/quiz_behaviour')) {
     include_once($CFG->dirroot.'/blocks/quiz_behaviour/xlib.php');
+    $manager = get_block_quiz_behaviour_manager();
     block_quiz_behaviour_attempt_adds($attemptobj);
 }
 // CHANGE-.
@@ -87,7 +89,9 @@ if ($attemptobj->is_finished()) {
 $accessmanager = $attemptobj->get_access_manager(time());
 $accessmanager->setup_attempt_page($PAGE);
 $output = $PAGE->get_renderer('mod_quiz');
+// CHANGE+ : Check quiz_behaviour component after require_login to get course initialized.
 $output->set_attemptobj($attemptobj);
+// CHANGE-.
 $messages = $accessmanager->prevent_access();
 if (!$attemptobj->is_preview_user() && $messages) {
     print_error('attempterror', 'quiz', $attemptobj->view_url(),
@@ -126,7 +130,7 @@ $PAGE->requires->js_init_call('M.mod_quiz.init_attempt_form', null, false, quiz_
 
 // Arrange for the navigation to be displayed in the first region on the page.
 // CHANGE+.
-if ($manager && $manager->has_behaviour($attemptobj->get_quizid(), 'alternateattemptpage')) {
+if (!isset($manager) || !$manager->has_behaviour($attemptobj->get_quizid(), 'alternateattemptpage')) {
     // Standard quiz behaviour.
     $navbc = $attemptobj->get_navigation_panel($output, 'quiz_attempt_nav_panel', $page);
     $regions = $PAGE->blocks->get_regions();
