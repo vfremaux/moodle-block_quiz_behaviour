@@ -25,10 +25,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = 2018040200;
-$plugin->requires  = 2017081100;
-$plugin->maturity = MATURITY_BETA;
-$plugin->release  = "3.5.0 (Build 2018040200)";
+$plugin->requires  = 2018112800;
+$plugin->maturity = MATURITY_RC;
+$plugin->release  = "3.6.0 (Build 2018040200)";
 $plugin->component = 'block_quiz_behaviour';
 
 // Non moodle attributes.
-$plugin->codeincrement = '3.5.0000';
+$plugin->codeincrement = '3.6.0000';
