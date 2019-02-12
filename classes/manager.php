@@ -61,21 +61,22 @@ class manager {
     public function get_quizzes() {
         global $DB, $COURSE;
 
-        return $DB->get_records('quiz', '', 'id,name', array('course' => $COURSE->id));
+        return $DB->get_records('quiz', array('course' => $COURSE->id), 'id,name');
     }
 
     public function has_behaviour($qid, $behaviour) {
-        global $DB;
+        global $DB, $CFG;
 
         if (!$DB->record_exists('quiz', array('id' => $qid))) {
             if ($CFG->debug == DEBUG_DEVELOPER) {
                 // TODO : auto cleanup of the deleted instances.
-                throw moodle_exception("Invalid quiz. May be deleted");
+                throw new moodle_exception("Invalid quiz. May be deleted");
             }
             return false;
         }
 
         if (empty($this->blockinstance)) {
+            // Manager is ok, but there is no block in the course.
             return false;
         }
 

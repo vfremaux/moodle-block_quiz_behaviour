@@ -28,6 +28,7 @@ $string['quiz_behaviour:addinstance'] = 'Ajouter le bloc Quiz Behaviour';
 
 $string['afterattempt'] = 'Après la tentative';
 $string['alternateattemptpage'] = 'Disposition alternative de la page de test';
+$string['backtocourse'] = 'Revenir au cours';
 $string['beforeattempt'] = 'Avant la tentative';
 $string['deadend'] = 'Cul de sac';
 $string['deadendmessage'] = 'Message de cul de sac';
