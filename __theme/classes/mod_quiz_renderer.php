@@ -210,15 +210,7 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
                 get_string('submitallandfinish', 'quiz'));
         $button->id = 'responseform';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        if ($manager && $manager->has_behaviour($qid, 'alternateattemptpage'))) {
-=======
-        if ($manager && $manager->has_behaviour($qid, 'alternateattemptpage')) {
->>>>>>> MOODLE_35_STABLE
-=======
         if (!$manager || !$manager->has_behaviour($qid, 'alternateattemptpage')) {
->>>>>>> MOODLE_36_STABLE
             if ($attemptobj->get_state() == quiz_attempt::IN_PROGRESS) {
                 $button->add_action(new confirm_action(get_string('confirmclose', 'quiz'), null,
                     get_string('submitallandfinish', 'quiz')));
@@ -573,22 +565,14 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
         $restartlink =  $this->restart_preview_button(new moodle_url(
                 $this->attemptobj->start_attempt_url(), array('forcenew' => true)));
 
-<<<<<<< HEAD
-        // CHANGE
-=======
         // CHANGE+.
->>>>>>> MOODLE_35_STABLE
         $panelcontent = $this->countdown_timer($this->attemptobj, time()).$restartlink;
 
         $output .= html_writer::tag('div', $panelcontent, array('class' => 'othernav'));
 
         // $output .= html_writer::tag('div', $panel->render_end_bits($this),
         //         array('class' => 'othernav'));
-<<<<<<< HEAD
-        // /CHANGE
-=======
         // CHANGE-.
->>>>>>> MOODLE_35_STABLE
 
         $this->page->requires->js_init_call('M.mod_quiz.nav.init', null, false,
                 quiz_get_js_module());

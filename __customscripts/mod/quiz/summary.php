@@ -28,10 +28,11 @@
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
 
 $attemptid = required_param('attempt', PARAM_INT); // The attempt to summarise.
+$cmid = optional_param('cmid', null, PARAM_INT);
 
 $PAGE->set_url('/mod/quiz/summary.php', array('attempt' => $attemptid));
 
-$attemptobj = quiz_attempt::create($attemptid);
+$attemptobj = quiz_create_attempt_handling_errors($attemptid, $cmid);
 
 // Check login.
 require_login($attemptobj->get_course(), false, $attemptobj->get_cm());

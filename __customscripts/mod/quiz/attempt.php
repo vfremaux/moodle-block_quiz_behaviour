@@ -41,8 +41,9 @@ if ($id = optional_param('id', 0, PARAM_INT)) {
 // Get submitted parameters.
 $attemptid = required_param('attempt', PARAM_INT);
 $page = optional_param('page', 0, PARAM_INT);
+$cmid = optional_param('cmid', null, PARAM_INT);
 
-$attemptobj = quiz_attempt::create($attemptid);
+$attemptobj = quiz_create_attempt_handling_errors($attemptid, $cmid);
 $page = $attemptobj->force_page_number_into_range($page);
 $PAGE->set_url($attemptobj->attempt_url(null, $page));
 
@@ -50,15 +51,10 @@ $PAGE->set_url($attemptobj->attempt_url(null, $page));
 require_login($attemptobj->get_course(), false, $attemptobj->get_cm());
 
 // CHANGE+ : Check quiz_behaviour component after require_login to get course initialized.
-<<<<<<< HEAD
-if (is_dir($CFG->dirroot.'/blocks/quiz_behaviour')) {
-    include_once($CFG->dirroot.'/blocks/quiz_behaviour/xlib.php');
-=======
 $manager = null;
 if (is_dir($CFG->dirroot.'/blocks/quiz_behaviour')) {
     include_once($CFG->dirroot.'/blocks/quiz_behaviour/xlib.php');
     $manager = get_block_quiz_behaviour_manager();
->>>>>>> MOODLE_35_STABLE
     block_quiz_behaviour_attempt_adds($attemptobj);
 }
 // CHANGE-.
