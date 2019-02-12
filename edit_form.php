@@ -35,7 +35,7 @@ class block_quiz_behaviour_edit_form extends block_edit_form {
 
             $qname = format_string($q->name);
 
-            $mform->addElement('advcheckbox', 'config_alternateattemptpage', '<b>'.$qname.'</b>', '&nbsp;'.get_string('alternateattemptpage', 'block_quiz_behaviour'));
+            $mform->addElement('advcheckbox', 'config_alternateattemptpage'.$q->id, '<b>'.$qname.'</b>', '&nbsp;'.get_string('alternateattemptpage', 'block_quiz_behaviour'));
 
             $group = array();
             $group[] = $mform->createElement('advcheckbox', 'config_startnewever'.$q->id, '');
