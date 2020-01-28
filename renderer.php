@@ -28,6 +28,6 @@ class block_quiz_behaviour_renderer extends plugin_renderer_base {
 
         $template = new StdClass;
 
-        return $OUTPUT->render_from_template('block_quiz_renderer/category_filters, '$template);
+        return $OUTPUT->render_from_template('block_quiz_behaviour/category_filters', $template);
     }
 }

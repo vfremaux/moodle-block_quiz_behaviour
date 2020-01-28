@@ -12,6 +12,9 @@ define(['jquery', 'core/log'], function($, log) {
         init: function() {
 
             $('.question-category-handle').bind('click', this.togglecategory);
+            $('#quiz-behaviour-cats-collapseall').bind('click', this.collapseall);
+            $('#quiz-behaviour-cats-expandall').bind('click', this.expandall);
+            $('#quiz-behaviour-cats-toggleempty').bind('click', this.toggleempty);
 
             log.debug("AMD Extended question bank initialized");
         },
