@@ -49,10 +49,15 @@ define(['jquery', 'core/log'], function($, log) {
         },
 
         toggleempty: function() {
+
+            var that = $(this);
+
             if ($('.question-category.is-not-empty').css('display') == 'block') {
                 $('.question-category.is-not-empty').css('display', 'none');
+                that.css('background-color', '#888');
             } else {
                 $('.question-category.is-not-empty').css('display', 'block');
+                that.css('background-color', '#ccc');
             }
         },
     };
