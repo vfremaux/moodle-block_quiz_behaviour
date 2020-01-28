@@ -91,6 +91,9 @@ $accessmanager = $attemptobj->get_access_manager(time());
 $accessmanager->setup_attempt_page($PAGE);
 $output = $PAGE->get_renderer('mod_quiz');
 // CHANGE+ : Check quiz_behaviour component after require_login to get course initialized.
+if (!method_exists($output, 'set_attemptobj')) {
+    print_error('the quiz_behaviour quiz redenderer overrides have not been properly installed in your current theme. Please contact administrator.');
+}
 $output->set_attemptobj($attemptobj);
 // CHANGE-.
 $messages = $accessmanager->prevent_access();
