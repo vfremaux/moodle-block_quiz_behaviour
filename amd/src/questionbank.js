@@ -33,7 +33,25 @@ define(['jquery', 'core/log'], function($, log) {
                 $('#' + subs).css('display', 'block');
                 $('#' + handleid).attr('aria-expanded', true);
             }
-        }
+        },
+
+        collapseall: function() {
+            $('.question-category.sub').display('none');
+            $('.question-category-handle').attr('aria-expanded', false);
+        },
+
+        expandall: function() {
+            $('.question-category.sub').display('block');
+            $('.question-category-handle').attr('aria-expanded', true);
+        },
+
+        toggleempty: function() {
+            if ($('.question-category.is-not-empty').css('display') == 'block') {
+                $('.question-category.is-not-empty').css('display', 'none');
+            } else {
+                $('.question-category.is-not-empty').css('display', 'block');
+            }
+        },
     };
 
     return extendedquestionbank;
