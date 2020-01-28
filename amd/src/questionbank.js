@@ -39,12 +39,12 @@ define(['jquery', 'core/log'], function($, log) {
         },
 
         collapseall: function() {
-            $('.question-category.sub').display('none');
+            $('.question-category.sub').css('display', 'none');
             $('.question-category-handle').attr('aria-expanded', false);
         },
 
         expandall: function() {
-            $('.question-category.sub').display('block');
+            $('.question-category.sub').css('display', 'block');
             $('.question-category-handle').attr('aria-expanded', true);
         },
 
