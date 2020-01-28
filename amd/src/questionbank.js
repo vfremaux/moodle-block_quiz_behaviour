@@ -55,9 +55,11 @@ define(['jquery', 'core/log'], function($, log) {
             if ($('.question-category.is-not-empty').css('display') == 'block') {
                 $('.question-category.is-not-empty').css('display', 'none');
                 that.css('background-color', '#888');
+                that.css('color', '#fff');
             } else {
                 $('.question-category.is-not-empty').css('display', 'block');
                 that.css('background-color', '#ccc');
+                that.css('color', '#000');
             }
         },
     };
