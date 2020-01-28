@@ -11,12 +11,16 @@ define(['jquery', 'core/log'], function($, log) {
 
         init: function() {
 
-            $('.question-categories-handle').bind('click', this.togglecategory);
+            $('.question-category-handle').bind('click', this.togglecategory);
 
             log.debug("AMD Extended question bank initialized");
         },
 
-        togglecategory: function() {
+        togglecategory: function(e) {
+
+            e.stopPropagation();
+            e.preventDefault();
+
             var that = $(this);
 
             var handleid = that.attr('id');
