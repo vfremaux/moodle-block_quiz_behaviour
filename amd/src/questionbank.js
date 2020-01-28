@@ -25,7 +25,7 @@ define(['jquery', 'core/log'], function($, log) {
 
             var handleid = that.attr('id');
             var id = handleid.replace('question-category-handle-', '');
-            var subs = 'question-category-subs-' + id;
+            var subs = 'question-category-sub-' + id;
             if ($('#' + subs).css('display') == 'block') {
                 $('#' + subs).css('display', 'none');
                 $('#' + handleid).attr('aria-expanded', false);
