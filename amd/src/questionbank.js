@@ -51,6 +51,7 @@ define(['jquery', 'core/log'], function($, log) {
         toggleempty: function() {
 
             var that = $(this);
+            var parents;
 
             if ($('.question-category.is-not-empty').css('display') == 'block') {
                 $('.question-category.is-not-empty').css('display', 'none');
@@ -58,10 +59,12 @@ define(['jquery', 'core/log'], function($, log) {
                 that.css('color', '#fff');
                 // Reopen upgoing hierarchies to empty elements.
                 $('.question-category.is-empty').parentsUntil('.questioncategories').css('display', 'block');
-                $('.question-category.is-empty').parentsUntil('.questioncategories').css('opacity', 0.5);
+                parents = $('.question-category.is-empty').parentsUntil('.questioncategories');
+                parents.children('.question-category-header').css('opacity', 0.5);
             } else {
                 $('.question-category.is-not-empty').css('display', 'block');
-                $('.question-category.is-not-empty').css('opacity', 1);
+                parents = $('.question-category.is-empty').parentsUntil('.questioncategories');
+                parents.children('.question-category-header').css('opacity', 1);
                 that.css('background-color', '#ccc');
                 that.css('color', '#000');
             }
