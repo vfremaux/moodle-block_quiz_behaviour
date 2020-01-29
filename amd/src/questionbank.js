@@ -56,6 +56,8 @@ define(['jquery', 'core/log'], function($, log) {
                 $('.question-category.is-not-empty').css('display', 'none');
                 that.css('background-color', '#888');
                 that.css('color', '#fff');
+                // Reopen upgoing hierarchies to empty elements.
+                $('.question-category.is-empty').parentsUntil('.questioncategories').css('display', 'block');
             } else {
                 $('.question-category.is-not-empty').css('display', 'block');
                 that.css('background-color', '#ccc');
