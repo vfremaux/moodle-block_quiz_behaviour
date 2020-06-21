@@ -26,6 +26,9 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['quiz_behaviour:addinstance'] = 'Add a Quiz Behaviour block';
 
+// Privacy.
+$string['privacy:metadata'] = 'The Quiz Behaviour block plugin does not store itself any personal data about the users.';
+
 $string['collapseall'] = 'Collapse all';
 $string['expandall'] = 'Expand all';
 $string['showempty'] = 'Show empty categories';

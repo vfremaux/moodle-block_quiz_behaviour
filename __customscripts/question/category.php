@@ -27,7 +27,9 @@
 // require_once("../config.php");
 require_once($CFG->dirroot."/question/editlib.php");
 require_once($CFG->dirroot."/question/category_class.php");
-require_once($CFG->dirroot."/customscripts/question/classes/question_category_extended.class.php");
+// CHANGES+ : question bank enhancement.
+require_once($CFG->dirroot."/blocks/quiz_behaviour/classes/question_category_extended.class.php");
+// CHANGES-.
 
 list($thispageurl, $contexts, $cmid, $cm, $module, $pagevars) =
         question_edit_setup('categories', '/question/category.php');
@@ -55,11 +57,14 @@ foreach ((array)$param as $key=>$value) {
     }
 }
 $PAGE->set_url($url);
-$PAGE->requires->css('/customscripts/question/extended_question_categories.css');
+// CHANGES+ : question bank enhancement.
+$PAGE->requires->css('/blocks/quiz_behaviour/css/extended_question_categories.css');
+$PAGE->requires->js_call_amd('block_quiz_behaviour/questionbank', 'init');
 
 $qcobject = new question_category_object_extended($pagevars['cpage'], $thispageurl,
         $contexts->having_one_edit_tab_cap('categories'), $param->edit,
         $pagevars['cat'], $param->delete, $contexts->having_cap('moodle/question:add'));
+// CHANGE-.
 
 if ($param->left || $param->right || $param->moveup || $param->movedown) {
     require_sesskey();
@@ -151,6 +156,10 @@ if (!empty($param->edit)) {
     $qcobject->display_move_form($questionstomove, $category);
 } else {
     // Display the user interface.
+// CHANGES+ : question bank enhancement.
+    $enhancedrenderer = $PAGE->get_renderer('block_quiz_behaviour');
+    echo $enhancedrenderer->bank_category_filters();
+// CHANGE-.
     $qcobject->display_user_interface();
 }
 echo $OUTPUT->footer();

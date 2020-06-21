@@ -157,10 +157,12 @@ class question_category_list_item_extended extends question_category_list_item {
         }
         $category = $this->item;
 
-        if (isset($this->children)) {
+        if (isset($this->children) && !empty($this->children->items)) {
             $childrenhtml = $this->children->to_html($indent, $extraargs);
+            $hassubs = true;
         } else {
             $childrenhtml = '';
+            $hassubs = false;
         }
 
         $itemhtml = $this->item_html($extraargs);
@@ -178,11 +180,16 @@ class question_category_list_item_extended extends question_category_list_item {
 
         $subs = '';
         if (!empty($childrenhtml)) {
-            $subs = ('<div id="question-category-sub-'.$this->id.'" class="question-category">'.$childrenhtml.'</div>');
+            $subs = ('<div id="question-category-sub-'.$this->id.'" class="question-category sub">'.$childrenhtml.'</div>');
+        }
+
+        $isemptyclass = 'is-not-empty';
+        if ($category->questioncount == 0 && !$hassubs) {
+            $isemptyclass = 'is-empty';
         }
 
         $str = '
-            <div id="question-category-'.$this->id.'" class="question-category level-'.$indent.'" '.$this->attributes.'>
+            <div id="question-category-'.$this->id.'" class="question-category level-'.$indent.' '.$isemptyclass.'" '.$this->attributes.'>
                 <div class="question-category-header">
                     <div class="question-category-item">
                     '.$itemhtml.'

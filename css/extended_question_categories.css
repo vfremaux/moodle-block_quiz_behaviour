@@ -6,6 +6,13 @@
     max-width: 70%;
 }
 
+.question-category-commands {
+    background-color: #f4f4f4;
+    border-radius: 15px 0 0 15px;
+    min-width: 20%;
+    padding-left: .5rem;
+}
+
 .question-category.level-1 .question-category-header {
     background-color: #d0d0d0;
 }

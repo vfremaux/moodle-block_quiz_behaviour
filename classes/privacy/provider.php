@@ -14,22 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Block Quiz behaviour teacher utility.
- *
- * @package    block_quiz_behaviour
- * @copyright  2018 Valery Fremaux
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+namespace block_quiz_behaviour\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2018040200;
-$plugin->requires  = 2018112800;
-$plugin->maturity = MATURITY_RC;
-$plugin->release  = "3.6.0 (Build 2018040200)";
-$plugin->component = 'block_quiz_behaviour';
-
-// Non moodle attributes.
-$plugin->codeincrement = '3.6.0000';
-$plugin->privacy = 'public';
+class provider implements \core_privacy\local\metadata\null_provider {
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}
