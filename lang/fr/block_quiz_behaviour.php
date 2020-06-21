@@ -24,7 +24,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+// Privacy.
+$string['privacy:metadata'] = 'Le plugin de modification de comportement des tests ne stocke pas de données personnelles.';
+
 $string['quiz_behaviour:addinstance'] = 'Ajouter le bloc Quiz Behaviour';
+
+$string['collapseall'] = 'Fermer tout';
+$string['expandall'] = 'Ouvrir tout';
+$string['showempty'] = 'Montrer les catégories vides uniquement';
+$string['showall'] = 'Montrer toutes les catégories';
 
 $string['afterattempt'] = 'Après la tentative';
 $string['alternateattemptpage'] = 'Disposition alternative de la page de test';

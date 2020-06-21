@@ -46,7 +46,10 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
             $nextpage) {
 
         $course = $attemptobj->get_course();
-        $manager = get_block_quiz_behaviour_manager();
+        $manager = null;
+        if (function_exists('get_block_quiz_behaviour_manager')) {
+            $manager = get_block_quiz_behaviour_manager();
+        }
         $qid = $attemptobj->get_quizid();
 
         if (!$manager || !$manager->has_behaviour($qid, 'alternateattemptpage')) {
@@ -155,7 +158,10 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
 
         $course = $attemptobj->get_course();
         $qid = $attemptobj->get_quizid();
-        $manager = get_block_quiz_behaviour_manager();
+        $manager = null;
+        if (function_exists('get_block_quiz_behaviour_manager')) {
+            $manager = get_block_quiz_behaviour_manager();
+        }
 
         $output = '';
         $output .= $this->header();
@@ -180,7 +186,10 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
 
         $course = $attemptobj->get_course();
         $qid = $attemptobj->get_quizid();
-        $manager = get_block_quiz_behaviour_manager();
+        $manager = null;
+        if (function_exists('get_block_quiz_behaviour_manager')) {
+            $manager = get_block_quiz_behaviour_manager();
+        }
 
         // CHANGE : Make it aware of no-backwards restriction.
         $navmethod = $attemptobj->get_quiz()->navmethod;
@@ -448,7 +457,10 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
         $course = $attemptobj->get_course();
         $courseurl = new moodle_url('/course/view.php', array('id' => $course->id));
 
-        $manager = get_block_quiz_behaviour_manager();
+        $manager = null;
+        if (function_exists('get_block_quiz_behaviour_manager')) {
+            $manager = get_block_quiz_behaviour_manager();
+        }
         $qid = $attemptobj->get_quizid();
 
         if ($manager && $manager->has_behaviour($qid, 'directreturn')) {
@@ -496,7 +508,10 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
      */
     public function review_form($page, $showall, $displayoptions, $content, $attemptobj) {
 
-        $manager = get_block_quiz_behaviour_manager();
+        $manager = null;
+        if (function_exists('get_block_quiz_behaviour_manager')) {
+            $manager = get_block_quiz_behaviour_manager();
+        }
         $qid = $attemptobj->get_quizid();
 
         if ($displayoptions->flags != question_display_options::EDITABLE) {
@@ -561,9 +576,10 @@ class theme_<themename>_mod_quiz_renderer extends mod_quiz_renderer {
         // Override quiz_nav_panel_base::render_restart_preview_link()
         if (!$this->attemptobj->is_own_preview()) {
             $restartlink = '';
+        } else {
+            $restarturl = new moodle_url($this->attemptobj->start_attempt_url(), array('forcenew' => true));
+            $restartlink =  $this->restart_preview_button($restarturl);
         }
-        $restartlink =  $this->restart_preview_button(new moodle_url(
-                $this->attemptobj->start_attempt_url(), array('forcenew' => true)));
 
         // CHANGE+.
         $panelcontent = $this->countdown_timer($this->attemptobj, time()).$restartlink;

@@ -15,21 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Block Quiz behaviour teacher utility.
- *
- * @package    block_quiz_behaviour
- * @copyright  2018 Valery Fremaux
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     block_quiz_behaviour
+ * @category    blocks
+ * @author      Valery Fremaux (valery.fremaux@gmail.com)
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+class block_quiz_behaviour_renderer extends plugin_renderer_base {
 
-$plugin->version   = 2018040200;
-$plugin->requires  = 2018112800;
-$plugin->maturity = MATURITY_RC;
-$plugin->release  = "3.6.0 (Build 2018040200)";
-$plugin->component = 'block_quiz_behaviour';
+    public function bank_category_filters() {
+        global $OUTPUT;
 
-// Non moodle attributes.
-$plugin->codeincrement = '3.6.0000';
-$plugin->privacy = 'public';
+        $template = new StdClass;
+
+        return $OUTPUT->render_from_template('block_quiz_behaviour/category_filters', $template);
+    }
+}
