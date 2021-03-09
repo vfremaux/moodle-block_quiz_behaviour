@@ -26,6 +26,11 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['quiz_behaviour:addinstance'] = 'Ajouter le bloc Quiz Behaviour';
 
+$string['collapseall'] = 'Fermer tout';
+$string['expandall'] = 'Ouvrir tout';
+$string['showempty'] = 'Montrer les catégories vides uniquement';
+$string['showall'] = 'Montrer toutes les catégories';
+
 $string['afterattempt'] = 'Après la tentative';
 $string['alternateattemptpage'] = 'Disposition alternative de la page de test';
 $string['backtocourse'] = 'Revenir au cours';
