@@ -25,12 +25,12 @@ require_once($CFG->dirroot.'/blocks/quiz_behaviour/classes/manager.php');
 require_once($CFG->dirroot.'/mod/quiz/locallib.php');
 
 $attemptid = required_param('attempt', PARAM_INT);
+$qid = $attemptobj->get_quizid();
 
 $url = new moodle_url('/blocks/quiz_behaviour/deadend.php', array('attempt' => $attemptid));
 $PAGE->set_url($url);
 
 $attemptobj = quiz_attempt::create($attemptid);
-$qid = $attemptobj->get_quizid();
 
 require_login($attemptobj->get_course(), $attemptobj->get_cm());
 
