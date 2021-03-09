@@ -1,0 +1,42 @@
+[role="teachertool"] {
+    background-color: #eeeeee !important;
+}
+
+[role="teachertool"] .content {
+    background-color: #ffddaa;
+    border: 1px dashed #aaaaaa;
+    padding: 5px !important;
+}
+
+#quiz-behaviour-progress-indicator {
+    height: 16px;
+    background-color: #a3a3dc;
+    border-radius: 3px;
+}
+
+.quiz-behaviour-progress-bar {
+    height: 16px;
+    background-color: #21277c;
+    border-radius: 3px;
+}
+
+.quiz-behaviour-qref,
+.quiz-behaviour-qcat {
+    margin-top: 10px;
+}
+
+#page-mod-quiz-attempt .return-button {
+    margin-top : 40px;
+    padding-top:10px;
+    border-top:1px solid #ccc;
+}
+
+a.quiz-behaviour-ctls {
+    font-size: 85%;
+    cursor: pointer;
+    margin: 0 10px;
+    border-radius: 8px;
+    display: inline-block;
+    padding: 2px;
+    background-color: #ccc;
+}

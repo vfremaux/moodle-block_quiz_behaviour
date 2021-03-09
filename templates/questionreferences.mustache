@@ -1,0 +1,39 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_quiz_behaviour/questionreferences
+
+    Template which changes the layout of a question reference.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+}}
+<!-- questionreferences -->
+{{#questionrefs}}
+<div class="quiz-behaviour-qref">
+    <span class="qinfo-label">{{{questionreferencestr}}}:&ensp;</span>
+    <span class="qinfo-value">{{{qname}}}</span>
+</div>
+<div class="quiz-behaviour-qcat">
+    <span class="qinfo-label">{{{questioncategorystr}}}:&ensp;</span>
+    <span class="qinfo-value">{{{qcatname}}}</span>
+</div>
+{{/questionrefs}}
+<!-- /questionreferences -->
