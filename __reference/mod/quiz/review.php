@@ -42,8 +42,10 @@ if ($page !== 0) {
     $url->param('showall', $showall);
 }
 $PAGE->set_url($url);
+$PAGE->set_secondary_active_tab("modulepage");
 
 $attemptobj = quiz_create_attempt_handling_errors($attemptid, $cmid);
+$attemptobj->preload_all_attempt_step_users();
 $page = $attemptobj->force_page_number_into_range($page);
 
 // Now we can validate the params better, re-genrate the page URL.
@@ -94,11 +96,9 @@ if ($options->flags == question_display_options::EDITABLE && optional_param('sav
 
 // Work out appropriate title and whether blocks should be shown.
 if ($attemptobj->is_own_preview()) {
-    $strreviewtitle = get_string('reviewofpreview', 'quiz');
     navigation_node::override_active_url($attemptobj->start_attempt_url());
 
 } else {
-    $strreviewtitle = get_string('reviewofattempt', 'quiz', $attemptobj->get_attempt_number());
     if (empty($attemptobj->get_quiz()->showblocks) && !$attemptobj->is_preview_user()) {
         $PAGE->blocks->show_only_fake_blocks();
     }
@@ -106,8 +106,9 @@ if ($attemptobj->is_own_preview()) {
 
 // Set up the page header.
 $headtags = $attemptobj->get_html_head_contributions($page, $showall);
-$PAGE->set_title($attemptobj->get_quiz_name());
+$PAGE->set_title($attemptobj->review_page_title($page, $showall));
 $PAGE->set_heading($attemptobj->get_course()->fullname);
+$PAGE->activityheader->disable();
 
 // Summary table start. ============================================================================
 
@@ -215,8 +216,11 @@ if ($options->marks >= question_display_options::MARK_AND_MAX && quiz_has_grades
         $a->grade = html_writer::tag('b', quiz_format_grade($quiz, $grade));
         $a->maxgrade = quiz_format_grade($quiz, $quiz->grade);
         if ($quiz->grade != 100) {
+            // Show the percentage using the configured number of decimal places,
+            // but without trailing zeroes.
             $a->percent = html_writer::tag('b', format_float(
-                    $attempt->sumgrades * 100 / $quiz->sumgrades, 0));
+                    $attempt->sumgrades * 100 / $quiz->sumgrades,
+                    $quiz->decimalpoints, true, true));
             $formattedgrade = get_string('outofpercent', 'quiz', $a);
         } else {
             $formattedgrade = get_string('outof', 'quiz', $a);
